@@ -1,30 +1,15 @@
 import { useState } from 'react'
 import { FormWrapper } from '../FormWrapper'
 import { FormInput } from '../Inputs'
-import Select from 'react-select'
+import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
+import { InterfaceFormData } from './_typesafe'
 
 type UserFormProps = {
-  //   updateFields: (fields: Partial<UserData>) => void
-  register: any
-  errors: any
+  register: UseFormRegister<any>
+  errors: FieldErrorsImpl<Partial<InterfaceFormData>>
 }
 
 export function AddressForm({ register, errors }: UserFormProps) {
-  const [selectedOptions, setSelectedOptions] = useState()
-
-  // Array of all options
-  const optionList = [
-    { value: 'red', label: 'Red' },
-    { value: 'green', label: 'Green' },
-    { value: 'yellow', label: 'Yellow' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'white', label: 'White' },
-  ]
-  // Function triggered on selection
-  function handleSelect(data: any) {
-    setSelectedOptions(data)
-  }
-
   return (
     <FormWrapper title='Address'>
       <FormInput
@@ -67,18 +52,6 @@ export function AddressForm({ register, errors }: UserFormProps) {
           required: 'This field is required',
         })}
       />
-
-      <h2>Choose your color</h2>
-      <div className='dropdown-container'>
-        <Select
-          options={optionList}
-          placeholder='Select color'
-          value={selectedOptions}
-          onChange={handleSelect}
-          isSearchable={true}
-          className='bg-black'
-        />
-      </div>
     </FormWrapper>
   )
 }

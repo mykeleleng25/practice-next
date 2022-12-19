@@ -1,20 +1,14 @@
+import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
 import { FormWrapper } from '../FormWrapper'
 import { FormInput } from '../Inputs'
+import { InterfaceFormData } from './_typesafe'
 
 type UserFormProps = {
-  //   updateFields: (fields: Partial<UserData>) => void
-  register: any
-  errors: any
+  register: UseFormRegister<any>
+  errors: FieldErrorsImpl<Partial<InterfaceFormData>>
 }
 
-export function UserForm({
-  //   firstName,
-  //   lastName,
-  //   age,
-  //   updateFields,
-  register,
-  errors,
-}: UserFormProps) {
+export function UserForm({ register, errors }: UserFormProps) {
   return (
     <FormWrapper title='User Information'>
       <FormInput

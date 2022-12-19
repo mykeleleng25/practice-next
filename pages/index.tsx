@@ -7,48 +7,15 @@ import { useMultiStepForm } from '../hooks/useMultiForm'
 import { UserForm } from '../component/forms/UserForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { AddressForm } from '../component/forms/AddressForm'
-
-const inter = Inter({ subsets: ['latin'] })
-
-type FormData = {
-  firstName: string
-  lastName: string
-  age: string
-  street: string
-  city: string
-  state: string
-  zip: string
-  email: string
-  password: string
-}
-
-const INITIAL_DATA: FormData = {
-  firstName: '',
-  lastName: '',
-  age: '',
-  street: '',
-  city: '',
-  state: '',
-  zip: '',
-  email: '',
-  password: '',
-}
+import { InterfaceFormData } from '../component/forms/_typesafe'
 
 export default function Home() {
-  // const [data, setData] = useState(INITIAL_DATA)
-
-  // const updateFields = (fields: Partial<FormData>) => {
-  //   setData((prev) => {
-  //     return { ...prev, ...fields }
-  //   })
-  // }
-
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormData>()
+  } = useForm<InterfaceFormData>()
 
   const {
     step,
@@ -64,8 +31,7 @@ export default function Home() {
     <h1>Confirm</h1>,
   ])
 
-  console.log(watch('firstName'))
-  const onSubmit: SubmitHandler<Partial<FormData>> = (form_data) => {
+  const onSubmit: SubmitHandler<Partial<InterfaceFormData>> = (form_data) => {
     if (!isLastStep) return nextStep()
     console.log(form_data)
     alert('Successfully Created!')
